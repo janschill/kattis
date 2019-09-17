@@ -25,7 +25,7 @@ public class PlantingTrees {
 
 		Arrays.sort(seedlings, Collections.reverseOrder());
 		bufferedReader.close();
-		
+
 		return seedlings[0] + 1;
 	}
 
