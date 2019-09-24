@@ -18,29 +18,17 @@ public class IntervalScheduling {
   }
 
   static int solveIntervalSchedulingProblem(List<int[]> intervals) {
-    int numberOfIntervals = 0;
+    int numberOfIntervals = 1;
+    int[] interval = intervals.get(0);
 
-    while (intervals.size() > 0) {
-      int finishTime = intervals.get(0)[1];
-      numberOfIntervals++;
-      removeOverlappingIntervals(intervals, finishTime);
+    for (int i = 1; i < intervals.size(); i++) {
+      if (intervals.get(i)[0] >= interval[1]) {
+        interval = intervals.get(i);
+        numberOfIntervals++;
+      }
     }
 
     return numberOfIntervals;
-  }
-
-  static void removeOverlappingIntervals(List<int[]> intervals, int finishTime) {
-    List<int[]> removeFromList = new ArrayList<>();
-    for (int[] interval : intervals) {
-      if (!isNotOverlapping(interval[0], interval[1], finishTime)) {
-        removeFromList.add(interval);
-      }
-    }
-    intervals.removeAll(removeFromList);
-  }
-
-  static boolean isNotOverlapping(int startTime, int endTime, int referenceFinsishTime) {
-    return startTime >= referenceFinsishTime;
   }
 
   static void sortbyColumn(List<int[]> arr, int col) {
@@ -56,7 +44,7 @@ public class IntervalScheduling {
 
   static List<int[]> parseInput() {
     File file = new File(
-        "/Users/janschill/projects/university/master/1_semester/algorithm_design/kattis/src/intervalscheduling/2.in");
+        "/Users/janschill/projects/university/master/1_semester/algorithm_design/kattis/src/intervalscheduling/1.in");
     BufferedReader br = null;
     List<int[]> intervals = new ArrayList<int[]>();
 
