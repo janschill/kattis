@@ -1,23 +1,16 @@
 package mst;
 
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class MST {
   public static void main(String[] args) throws NumberFormatException, IOException {
-    // BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    String path = "/Users/janschill/projects/university/master/1_semester/algorithm_design/lab/kattis/src/mst/minspantree.in";
-    BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+    Kattio kattio = new Kattio(System.in);
 
     while (true) {
-      String line = bufferedReader.readLine();
-      String[] lineParts = line.split(" ");
-      int numberOfVertices = Integer.parseInt(lineParts[0]);
-      int numberOfEdges = Integer.parseInt(lineParts[1]);
+      int numberOfVertices = kattio.getInt();
+      int numberOfEdges = kattio.getInt();
 
       if (numberOfVertices == 0 && numberOfEdges == 0) {
         break;
@@ -26,18 +19,15 @@ public class MST {
       } else {
         Graph graph = new Graph(numberOfVertices, numberOfEdges);
         for (int i = 0; i < numberOfEdges; i++) {
-          String l = bufferedReader.readLine();
-          String[] lps = l.split(" ");
-
-          graph.edges[i].start = Integer.parseInt(lps[0]);
-          graph.edges[i].destination = Integer.parseInt(lps[1]);
-          graph.edges[i].weight = Integer.parseInt(lps[2]);
+          graph.edges[i].start = kattio.getInt();
+          graph.edges[i].destination = kattio.getInt();
+          graph.edges[i].weight = kattio.getInt();
         }
 
         graph.findMinimumSpanningTree();
       }
     }
-    bufferedReader.close();
+    kattio.close();
   }
 }
 
